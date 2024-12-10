@@ -1,0 +1,337 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #000000, #5A2A8A);
+  color: rgb(255, 255, 255);
+}
+
+/* Styling for Projects Section */
+#projects {
+  padding: 0rem 0rem;
+  text-align: center;
+  position: relative;
+  font-size: 30px;
+  transform: translateY(-150px); /* Adjust this value to move it up or down */
+}
+
+/* Projects Section Styling */
+.projects-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column */
+  gap: 20px; /* Space between projects */
+  justify-items: center; /* Center align items in the grid */
+  position: relative;
+  perspective: 1200px; /* 3D perspective */
+  transform: translateY(-20px); /* Adjust this value to move it up or down */
+}
+
+
+.project {
+  position: relative;
+  width: 300px; /* Adjust to fit your design */
+  height: 200px; /* Adjust to fit your design */
+  overflow: hidden; /* Hide any overflow (e.g., if the image is cropped) */
+  position: relative;
+  background: rgba(255, 0, 0, 0); /* Background for visibility */
+  border-radius: 5px;
+  transform-style: preserve-3d; /* Enable 3D transformations */
+  transform: rotateX(-10deg) rotateY(-10deg) translateZ(0); /* Initial 3D tilt */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+/* Hover Effect */
+.project:hover {
+  transform: scale(1.1) rotateY(0deg) rotateX(0deg) translateZ(20px); /* Bring forward */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  z-index: 10; /* Ensure hovered project appears above others */
+}
+
+@media (max-width: 768px) {
+  .project {
+    width: 100%; /* Make the container full width on smaller screens */
+    height: auto; /* Allow height to adjust based on width */
+  }
+}
+
+/* Responsive: Ensure it adjusts for smaller screens */
+@media (max-width: 768px) {
+  .project {
+    height: 200px; /* Adjust height for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .project {
+    height: auto; /* Ensure proper resizing on very small screens */
+  }
+}
+
+/* Hover Effect to Enhance 3D */
+.project:hover {
+  transform: scale(1.1) rotateY(-10deg) rotateX(5deg); /* Slight tilt */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Click Effect for Enlarging with 3D */
+.project.enlarged {
+  transform: scale(3) rotateY(0deg); /* Enlarged and flat */
+  z-index: 10; /* Bring it to the front */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* Overlay for Enlarged State */
+.project.enlarged::after {
+  content: '';
+  position: auto;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* Dark background */
+  z-index: 5; /* Place behind the enlarged project */
+}
+
+/* Project Image Styling */
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image fills the container */
+  border-radius: 10px; /* Match container's rounded corners */
+  transform: translateZ(0); /* Keep image in the same plane */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Optional: Add text styling for the description */
+.project p {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+  width: 80%;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.project.enlarged p {
+  opacity: 0; /* Show text when the image is enlarged */
+}
+
+/* Navigation Bar */
+nav {
+  position: sticky; /* Sticky navbar that stays at the top of the viewport */
+  top: 0; /* Ensure it stays at the top */
+  left: 0;
+  width: 100%;
+  background-color: #000000;
+  padding: 10px 0;
+  z-index: 100; /* Ensure it stays on top of content */
+  display: flex;
+  justify-content: center; /* Center align the items */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Navigation Links */
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #f40c3f;
+}
+
+/* Prevent double scrollbar */
+body {
+  overflow-y: auto; /* Ensure only vertical scrolling */
+}
+
+/* Sections */
+.section {
+  min-height: 100vh;
+  padding: 1rem 1rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section Images */
+.section img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+/* Hero Section */
+#hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
+
+#hero h1 {
+  font-size: 15rem;
+  font-weight: bold;
+}
+
+/* Style for the dots */
+.dot {
+  position: absolute;
+  background-color: #000000;
+  border-radius: 50%; /* Circular dots */
+  opacity: 0.7; /* Slight transparency */
+  pointer-events: none; /* Prevent interaction */
+}
+
+/* Slider Animation Styles */
+.slider-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f40c3f; /* Matches your theme */
+  transform: translateX(-100%); /* Start off-screen */
+  z-index: 9999;
+  transition: transform 0.8s ease-in-out;
+}
+
+.slider-container.active {
+  transform: translateX(0); /* Slide into view */
+}
+
+.slider-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* About Me Section */
+#about {
+  padding: 50px 0;
+  text-align: center;
+  font-size: 2rem; /* Default font size for the "About Me" text */
+  line-height: 1.6; /* Add line height for readability */
+}
+
+/* Wrapper for description to make it more legible */
+.about-description {
+  display: inline-block;
+  max-width: 800px; /* You can adjust this value */
+  background-color: rgb(0, 0, 0); /* Semi-transparent background */
+  color: white; /* White text for contrast */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(82, 81, 81, 0.3); /* Soft shadow for depth */
+  font-size: 1.1rem; /* Slightly larger text */
+  line-height: 1.6; /* Adjust line height for better readability */
+  margin-top: 30px;
+  font-family:'Poppins',sans-serif;
+  position: relative;
+}
+
+/* Optional: Hover effect on description box */
+.about-description:hover {
+  background-color: rgba(77, 75, 75, 0.651);
+}
+
+#about h2 {
+  font-size: 5rem; /* Font size for the heading */
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* Contact Info Section */
+#contact {
+  padding: 5rem 2rem;
+  z-index: -1;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 1rem; /* Default font size for the "Contact Info" text */
+  line-height: 1.6; /* Add line height for readability */
+}
+
+body {
+  position: auto;
+  z-index: 1; /* Ensure the grid stays behind the contact section */
+}
+
+#contact h2 {
+  font-size: 2.5rem; /* Font size for the heading */
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+#contact p {
+  font-size: 1.4rem; /* Slightly larger font size for contact details */
+  margin-bottom: 1rem;
+}
+
+#contact a {
+  font-size: 3rem; /* Font size for clickable links */
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+#contact a:hover {
+  color: #f40c3f; /* Hover effect for links */
+}
+
+/* Contact Section */
+#contact {
+  position: relative; /* Ensure it's positioned in the stacking context */
+  z-index: 1000; /* Higher z-index to place it above other elements */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
